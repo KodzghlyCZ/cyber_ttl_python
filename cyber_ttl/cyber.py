@@ -1,5 +1,6 @@
 from .modbus import readHoldingRegisters, readInputRegisters
 from .maps.error import error_map
+from .maps.sensor_gas_types import sensorGasTypeMap
 
 # Function to calculate gas concentration
 def calculate_concentration():
@@ -23,19 +24,26 @@ def calculate_concentration():
         print(f"Error: {e}")
         return None
 
-def get_gas_name(sensor_hex, gas_hex):
-   
-    # Read input registers (sensor reading)
-    reg_2000 = readHoldingRegisters(0x00, 1)[0]  # Offset 0x02 from 0x1000
+def get_gas_name():
+    try:
+        # Read sensor and gas registers
+        sensor_hex = readHoldingRegisters(0x0E, 1)[0]  # Example address for sensor register
+        gas_hex = readHoldingRegisters(0x14, 1)[0]  # Example address for gas register
 
-    # Read Real_FS scaling factor
-    reg_2007h = readHoldingRegisters(0x07, 1)[0] >> 8  # Offset 0x07 from 0x2000
 
+        # Combine the sensor and gas register values to create a unique key
+        combined_key = ((sensor_hex << 8) | (gas_hex >> 8)) & 0xFFFF
+
+        
+        # Look up the gas name using the combined key
+        gas_name = sensorGasTypeMap.get(combined_key, f"Unknown Gas (0x{combined_key:X})")
+        
+        # Return the gas name
+        return f"Gas: {gas_name}"
     
-    sensor_name = SENSOR_TYPE_MAP.get(sensor_hex, f"Unknown Sensor (0x{sensor_hex:X})")
-    gas_name = GAS_TYPE_MAP.get(gas_hex, f"Unknown Gas (0x{gas_hex:X})")
-    
-    return f"Sensor: {sensor_name}, Gas: {gas_name}"
+    except Exception as e:
+        print(f"Error: {e}")
+        return "Error retrieving gas name"
 
 def get_error_state():
     try:
