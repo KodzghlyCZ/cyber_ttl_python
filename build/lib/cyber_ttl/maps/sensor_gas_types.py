@@ -1,3 +1,5 @@
+from cyber_ttl.enums.GasType import GasType
+
 sensorGasTypeMap = {
     0x0900: GasType.METHANE,
     0x0A00: GasType.METHANE,

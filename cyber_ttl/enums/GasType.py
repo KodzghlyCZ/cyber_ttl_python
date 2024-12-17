@@ -1,8 +1,6 @@
 from enum import Enum
 
-
 class GasType(Enum):
-
     ACETIC_ACID = "Acetic Acid"
     ACETONE_2_5 = "Acetone (0-2,5 %Vol)"
     ACETYLENE = "Acetylene"
