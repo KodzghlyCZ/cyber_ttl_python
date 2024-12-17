@@ -1,4 +1,4 @@
-# My Modbus Package
+# Cyber TTL 
 
 This package provides very limited functionality for communication with CYBER TTL boards from n.e.t. . Since I don't have much time to do things the proper way, I'm open to any PRs to help me make the package contain all the features according to the [documentation](https://www.nenvitech.com/wp-content/uploads/2024/05/MT3741_CYBER_MODBUS_CUSTOMER_MANUAL_Rev.-19.pdf)
 
