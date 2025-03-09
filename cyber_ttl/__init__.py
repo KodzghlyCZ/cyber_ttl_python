@@ -1,2 +1,2 @@
-from .modbus import *
+from .modbus import ModbusDriver
 from .cyber import *
