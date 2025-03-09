@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cyber_ttl',
-    version='0.1.0',
+    version='0.2.0',
     description='A package for Modbus communication and gas concentration calculation',
     author='Karel Matějovský',
     author_email='karel@matejovsky.org',
